@@ -1,0 +1,110 @@
+<header>
+    <p id="logo"><a href="<%= root_path%>">RailsCamp<span>Blog</span></a></p>
+    <nav>
+        <ul>
+            <li><%= link_to  'トップ', root_path %></li>
+            <% if user_signed_in? %>
+            <li><%= link_to  '新規投稿', new_post_path %></li>
+            <li><%= link_to  'ログアウト', destroy_user_session_path, method: :delete %></li>
+            <% else %>
+            <li><a href="/users/sign_up">新規登録</li>
+            <li><%= link_to  'ログイン', new_user_session_path %></li>
+
+            <% end %>
+
+            <div class="clear"></div>
+        </ul>
+    </nav>
+    <div class="clear"></div>
+</header>
+
+<div id="main">
+    <h1><%= image_tag 'main-img.jpg' %><h1>
+</div>
+
+
+<div id="article_wrap">
+
+    <div id="article_list">
+
+
+          <% @posts.each do |post| %>
+      <div>
+          <h2>
+            <%= link_to post.title, post_path(post) %>
+          </h2>
+
+          <p><%= post.created_at.strftime('%Y-%m-%d') %></p>
+          <% if user_signed_in? %>
+          <p><%= link_to '[Edit]', edit_post_path(post), class: 'command' %></p>
+          <p><%= link_to '[x]', post_path(post),
+                  method: :delete,
+                  class: 'command'%></p>
+          <% end %>
+
+      </div>
+          <% end %>
+
+
+
+        <div>
+            <h2><a href="/single.html">Railsでnil? blank? empty? present?メソッドの違い</a></h2>
+            <p>2015-09-20</p>
+        </div>
+
+        <div>
+            <h2><a href="/single.html">Github-flowで実践する初心者でも取り組みやすいGitワークフロー</a></h2>
+            <p>2015-09-17</p>
+        </div>
+
+        <div>
+            <h2><a href="/single.html">メタリックなテキストやボタンを作成するチュートリアルまとめ</a></h2>
+            <p>2015-09-16</p>
+        </div>
+
+        <div>
+            <h2><a href="/single.html">Photoshopのクリッピングパスを使いこなすために知っておきたいことまとめ</a></h2>
+            <p>2015-09-13</p>
+        </div>
+
+        <div>
+            <h2><a href="/single.html">自由自在に選択範囲の作成ができるクイックマスク機能を使ってみよう</a></h2>
+            <p>2015-09-11</p>
+        </div>
+
+        <div>
+            <h2><a href="/single.html">POPなどの印刷物をIllustratorで作る時にしてほしい設定</a></h2>
+            <p>2015-09-10</p>
+        </div>
+
+    </div>
+
+    <div id="sidebar">
+
+        <h2>★PV数ランキング</h2>
+
+
+                  <% @ranking_posts.each do |post| %>
+              <div>
+                  <h2>
+                    <%= link_to post.title, post_path(post) %>
+                  </h2>
+
+                  <p><%= post.created_at.strftime('%Y-%m-%d') %></p>
+                  <p><%= @daily_pageviews %></p>
+
+
+              </div>
+                  <% end %>
+
+
+
+    </div>
+    <div class="clear"></div>
+</div>
+
+<footer>
+    <div id="footer_inner">
+        <p>Copyright RailsCamp 2015 All Rights Reserved</p>
+    </div>
+</footer>

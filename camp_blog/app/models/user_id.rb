@@ -1,0 +1,2 @@
+class UserId < ApplicationRecord
+end

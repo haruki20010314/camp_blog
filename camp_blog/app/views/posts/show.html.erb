@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head lang="ja">
+    <meta charset="UTF-8">
+    <title>Rails Camp Blog</title>
+    <link rel="stylesheet" href="style.css" type="text/css" media="screen">
+</head>
+<body>
+
+<header>
+    <p id="logo"><a href="<%= root_path%>">RailsCamp<span>Blog</span></a></p>
+    <nav>
+        <ul>
+          <li><%= link_to  'トップ', root_path %></li>
+          <% if user_signed_in? %>
+          <li><%= link_to  '新規投稿', new_post_path %></li>
+          <li><%= link_to  'ログアウト', destroy_user_session_path, method: :delete %></li>
+          <% else %>
+          <li><a href="/users/sign_up">新規登録</li>
+          <li><%= link_to  'ログイン', new_user_session_path %></li>
+
+          <% end %>
+        </ul>
+    </nav>
+    <div class="clear"></div>
+</header>
+
+
+<div id="title">
+    <div>
+        <p><%= @post.created_at.strftime('%Y/%m/%d') %></p>
+        <h1><%= @post.title %></h1>
+    </div>
+</div>
+
+<div id="article_wrap">
+
+    <div id="content">
+      <p><%= @post.body %></p>
+      <p><%= @post.id %></p>
+      <p><%= @daily_pageviews %></p>
+
+      <p><%= @post.user_id %></p>
+
+
+
+
+
+
+    </div>
+
+
+    <div id="sidebar">
+
+        <h2>★PV数ランキング</h2>
+        <ul>
+            <li><a href="">記事タイトル記事タイトル１記事タイトル記事タイトル<span>（10PV）</span></a></li>
+            <li><a href="">記事タイトル記事タイトル１記事タイトル記事タイトル<span>（8PV）</span></a></li>
+            <li><a href="">記事タイトル記事タイトル１記事タイトル記事タイトル<span>（2PV）</span></a></li>
+        </ul>
+    </div>
+    <div class="clear"></div>
+</div>
+
+<footer>
+    <div id="footer_inner">
+        <p>Copyright RailsCamp 2015 All Rights Reserved</p>
+    </div>
+</footer>
+
+</body>
+</html>
